@@ -1,0 +1,13 @@
+spring:
+  application:
+    name:
+      second-service
+  config:
+    import:
+      - http://localhost:8888/
+  #    - optional:file:.env[.properties]
+
+  cloud:
+    config:
+      enabled: true
+
