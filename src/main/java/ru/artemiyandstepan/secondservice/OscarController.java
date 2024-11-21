@@ -1,6 +1,9 @@
 package ru.artemiyandstepan.secondservice;
 
+import jakarta.annotation.PostConstruct;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.*;
@@ -9,6 +12,7 @@ import ru.artemiyandstepan.secondservice.model.MovieGenre;
 
 import java.util.List;
 
+@Slf4j
 @Service
 @RestController
 @RequiredArgsConstructor
@@ -16,6 +20,13 @@ import java.util.List;
 public class OscarController {
 
     private final OscarService oscarService;
+    @Value("${app.first-service.base-url.movies}")
+    private String firstServiceUrl;
+
+    @PostConstruct
+    public void init() {
+        log.info("First service url set as: {}", firstServiceUrl);
+    }
 
     @GetMapping("screenwriters/get-loosers")
     public ResponseEntity<List<Movie>> getLoosers() {

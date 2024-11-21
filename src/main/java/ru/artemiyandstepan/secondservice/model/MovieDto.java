@@ -2,10 +2,7 @@ package ru.artemiyandstepan.secondservice.model;
 
 import com.fasterxml.jackson.databind.PropertyNamingStrategies;
 import com.fasterxml.jackson.databind.annotation.JsonNaming;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import java.util.List;
 
@@ -14,6 +11,7 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @JsonNaming(PropertyNamingStrategies.LowerCamelCaseStrategy.class)
+@Builder
 public class MovieDto {
     private List<Movie> items;
     private int totalItems;
