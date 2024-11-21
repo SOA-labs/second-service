@@ -4,10 +4,20 @@ spring:
       second-service
   config:
     import:
+      - optional:file:.env[.properties]
       - http://localhost:8888/
-  #    - optional:file:.env[.properties]
 
   cloud:
     config:
+      fail-fast: true
       enabled: true
+      label: changes-second-service-yml
+      discovery:
+        enabled: true
+        service-id: config-server
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:9999/eureka/
 
