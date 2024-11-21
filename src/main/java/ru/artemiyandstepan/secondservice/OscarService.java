@@ -28,7 +28,9 @@ public class OscarService {
 
     public MovieDto getMoviesPageable(int pageSize) {
         log.info("Request for {} movies from {}", pageSize, moviesUrl);
-        URI uri = URI.create(moviesUrl + "?size=" + pageSize);
+        URI uri = URI.create(moviesUrl
+//                + "?size=" + pageSize
+        );
         HttpRequest request = HttpRequest.newBuilder()
                 .uri(uri)
                 .method("GET", HttpRequest.BodyPublishers.noBody())
@@ -40,8 +42,16 @@ public class OscarService {
             if (response.statusCode() == 200) {
                 try {
                     // Десериализация в MovieDto
-                    return mapper.readValue(response.body(), new TypeReference<MovieDto>() {
+//                    return mapper.readValue(response.body(), new TypeReference<MovieDto>() {
+//                    });
+                    List<Movie> items = mapper.readValue(response.body(), new TypeReference<List<Movie>>() {
                     });
+                    return MovieDto.builder()
+                            .items(items.stream().limit(pageSize).toList())
+                            .currentPage(0)
+                            .totalItems(items.stream().limit(pageSize).toList().size())
+                            .pageSize(pageSize)
+                            .build();
                 } catch (Exception e) {
                     log.error(e.getMessage(), e);
                     return null;
