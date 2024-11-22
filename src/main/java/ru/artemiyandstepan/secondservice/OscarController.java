@@ -14,6 +14,7 @@ import java.util.List;
 
 @Slf4j
 @Service
+@CrossOrigin(origins = "*") // для фронта
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("${app.base-url}")
