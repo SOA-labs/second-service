@@ -1,22 +1,27 @@
+server:
+  port: 8090
+
+app:
+  base-url: /v1/oscar
+  first-service:
+    base-url:
+      movies: http://127.0.0.1:8080/first-service-web-1.0-SNAPSHOT/api/movies
+logging:
+  level:
+    root: info
+
 spring:
   application:
     name:
       second-service
-  config:
-    import:
-      - optional:file:.env[.properties]
-      - http://localhost:8888/
-
-  cloud:
-    config:
-      fail-fast: true
+  datasource:
+    url: jdbc:h2:mem:default
+    username: sa
+    password:
+  jpa:
+    hibernate:
+      ddl-auto: update
+    database-platform: org.hibernate.dialect.H2Dialect
+  h2:
+    console:
       enabled: true
-      label: changes-second-service-yml
-#      discovery:
-#        enabled: true
-#        service-id: config-server
-
-#eureka:
-#  client:
-#    service-url:
-#      defaultZone: http://localhost:9999/eureka/

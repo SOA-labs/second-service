@@ -22,12 +22,3 @@ public class Movie {
     private MpaaRating mpaaRating;
     private Person screenwriter;
 }
-
-@Setter
-@Getter
-@AllArgsConstructor
-@RequiredArgsConstructor
-class Coordinates {
-    private long x;
-    private Long y;
-}
