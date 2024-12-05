@@ -12,12 +12,11 @@ spring:
       fail-fast: true
       enabled: true
       label: changes-second-service-yml
-      discovery:
-        enabled: true
-        service-id: config-server
+#      discovery:
+#        enabled: true
+#        service-id: config-server
 
-eureka:
-  client:
-    service-url:
-      defaultZone: http://localhost:9999/eureka/
-
+#eureka:
+#  client:
+#    service-url:
+#      defaultZone: http://localhost:9999/eureka/

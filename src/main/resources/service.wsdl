@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions
+        xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+        xmlns:tns="http://www.example.com/soap"
+        xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+        xmlns="http://schemas.xmlsoap.org/wsdl/"
+        targetNamespace="http://www.example.com/soap"
+        name="OscarService">
+
+    <!-- Импорт схемы с типами данных -->
+    <types>
+        <xsd:schema>
+            <xsd:import namespace="http://www.example.com/soap" schemaLocation="movies.xsd"/>
+        </xsd:schema>
+    </types>
+
+    <!-- Определение сообщений -->
+    <message name="GetLoosersRequest">
+        <part name="parameters" element="tns:GetLoosersRequest"/>
+    </message>
+    <message name="GetLoosersResponse">
+        <part name="parameters" element="tns:GetLoosersResponse"/>
+    </message>
+
+    <message name="HumiliateByGenreRequest">
+        <part name="parameters" element="tns:HumiliateByGenreRequest"/>
+    </message>
+    <message name="HumiliateByGenreResponse">
+        <part name="parameters" element="tns:HumiliateByGenreResponse"/>
+    </message>
+
+    <message name="SleepRequest">
+        <part name="parameters" element="tns:SleepRequest"/>
+    </message>
+    <message name="SleepResponse">
+        <part name="parameters" element="tns:SleepResponse"/>
+    </message>
+
+    <!-- ПортТип определяет операции сервиса -->
+    <portType name="OscarServicePortType">
+        <operation name="getLoosers">
+            <input message="tns:GetLoosersRequest"/>
+            <output message="tns:GetLoosersResponse"/>
+        </operation>
+        <operation name="humiliateByGenre">
+            <input message="tns:HumiliateByGenreRequest"/>
+            <output message="tns:HumiliateByGenreResponse"/>
+        </operation>
+        <operation name="sleep">
+            <input message="tns:SleepRequest"/>
+            <output message="tns:SleepResponse"/>
+        </operation>
+    </portType>
+
+    <!-- Определение биндинга -->
+    <binding name="OscarServiceSoapBinding" type="tns:OscarServicePortType">
+        <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+        <operation name="getLoosers">
+            <soap:operation soapAction="http://www.example.com/soap/getLoosers"/>
+            <input>
+                <soap:body use="literal"/>
+            </input>
+            <output>
+                <soap:body use="literal"/>
+            </output>
+        </operation>
+        <operation name="humiliateByGenre">
+            <soap:operation soapAction="http://www.example.com/soap/humiliateByGenre"/>
+            <input>
+                <soap:body use="literal"/>
+            </input>
+            <output>
+                <soap:body use="literal"/>
+            </output>
+        </operation>
+        <operation name="sleep">
+            <soap:operation soapAction="http://www.example.com/soap/sleep"/>
+            <input>
+                <soap:body use="literal"/>
+            </input>
+            <output>
+                <soap:body use="literal"/>
+            </output>
+        </operation>
+    </binding>
+
+    <!-- Определение сервиса -->
+    <service name="OscarService">
+        <port name="OscarServicePort" binding="tns:OscarServiceSoapBinding">
+            <soap:address location="http://localhost:8080/ws"/>
+        </port>
+    </service>
+
+</definitions>

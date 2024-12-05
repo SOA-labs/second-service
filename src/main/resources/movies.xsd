@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema
+        xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+        xmlns:tns="http://www.example.com/soap"
+        targetNamespace="http://www.example.com/soap"
+        elementFormDefault="qualified">
+
+    <!-- Примитивные типы и перечисления -->
+    <xsd:simpleType name="MovieGenre">
+        <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="WESTERN"/>
+            <xsd:enumeration value="MUSICAL"/>
+            <xsd:enumeration value="ADVENTURE"/>
+            <xsd:enumeration value="TRAGEDY"/>
+        </xsd:restriction>
+    </xsd:simpleType>
+
+    <xsd:simpleType name="MpaaRating">
+        <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="G"/>
+            <xsd:enumeration value="PG"/>
+            <xsd:enumeration value="PG_13"/>
+            <xsd:enumeration value="NC_17"/>
+        </xsd:restriction>
+    </xsd:simpleType>
+
+    <xsd:simpleType name="Country">
+        <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="GERMANY"/>
+            <xsd:enumeration value="VATICAN"/>
+            <xsd:enumeration value="ITALY"/>
+            <xsd:enumeration value="SOUTH_KOREA"/>
+            <xsd:enumeration value="JAPAN"/>
+        </xsd:restriction>
+    </xsd:simpleType>
+
+    <xsd:simpleType name="Color">
+        <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="GREEN"/>
+            <xsd:enumeration value="RED"/>
+            <xsd:enumeration value="BLACK"/>
+            <xsd:enumeration value="WHITE"/>
+            <xsd:enumeration value="YELLOW"/>
+            <xsd:enumeration value="ORANGE"/>
+            <xsd:enumeration value="BROWN"/>
+        </xsd:restriction>
+    </xsd:simpleType>
+
+    <!-- Составные типы -->
+    <xsd:complexType name="Coordinates">
+        <xsd:sequence>
+            <xsd:element name="x" type="xsd:long"/>
+            <xsd:element name="y" type="xsd:long" minOccurs="0"/>
+        </xsd:sequence>
+    </xsd:complexType>
+
+    <xsd:complexType name="Location">
+        <xsd:sequence>
+            <xsd:element name="x" type="xsd:double"/>
+            <xsd:element name="y" type="xsd:float"/>
+            <xsd:element name="name" type="xsd:string"/>
+        </xsd:sequence>
+    </xsd:complexType>
+
+    <xsd:complexType name="Person">
+        <xsd:sequence>
+            <xsd:element name="name" type="xsd:string"/>
+            <xsd:element name="height" type="xsd:double" minOccurs="0"/>
+            <xsd:element name="eyeColor" type="tns:Color" minOccurs="0"/>
+            <xsd:element name="hairColor" type="tns:Color" minOccurs="0"/>
+            <xsd:element name="nationality" type="tns:Country" minOccurs="0"/>
+            <xsd:element name="location" type="tns:Location" minOccurs="0"/>
+        </xsd:sequence>
+    </xsd:complexType>
+
+    <xsd:complexType name="Movie">
+        <xsd:sequence>
+            <xsd:element name="id" type="xsd:int"/>
+            <xsd:element name="name" type="xsd:string"/>
+            <xsd:element name="coordinates" type="tns:Coordinates"/>
+            <xsd:element name="creationDate" type="xsd:dateTime" minOccurs="0"/>
+            <xsd:element name="oscarsCount" type="xsd:long"/>
+            <xsd:element name="usaBoxOffice" type="xsd:int"/>
+            <xsd:element name="genre" type="tns:MovieGenre"/>
+            <xsd:element name="mpaaRating" type="tns:MpaaRating" minOccurs="0"/>
+            <xsd:element name="screenwriter" type="tns:Person" minOccurs="0"/>
+        </xsd:sequence>
+    </xsd:complexType>
+
+    <!-- Массив фильмов -->
+    <xsd:complexType name="MovieList">
+        <xsd:sequence>
+            <xsd:element name="movie" type="tns:Movie" maxOccurs="unbounded"/>
+        </xsd:sequence>
+    </xsd:complexType>
+
+    <xsd:element name="GetLoosersResponse">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element name="movies" type="tns:MovieList"/>
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+
+    <xsd:element name="HumiliateByGenreRequest">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element name="genre" type="tns:MovieGenre"/>
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+
+    <xsd:element name="HumiliateByGenreResponse">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element name="result" type="xsd:string"/>
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+
+    <xsd:element name="SleepRequest">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element name="time" type="xsd:long"/>
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+
+    <xsd:element name="SleepResponse">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element name="message" type="xsd:string"/>
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+
+    <xsd:element name="GetLoosersRequest">
+        <xsd:complexType>
+            <xsd:sequence/>
+        </xsd:complexType>
+    </xsd:element>
+
+</xsd:schema>

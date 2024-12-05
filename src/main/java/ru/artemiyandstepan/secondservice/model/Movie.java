@@ -7,10 +7,6 @@ import lombok.Setter;
 
 import java.util.Date;
 
-enum MpaaRating {
-    G, PG, PG_13, NC_17
-}
-
 @Getter
 @Setter
 @AllArgsConstructor
